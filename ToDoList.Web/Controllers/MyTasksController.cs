@@ -62,6 +62,37 @@ namespace ToDoList.Web.Controllers
 
 
 
+        // GET: MyTasks/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var mytask = _db.MyTasks.Find(id);
+            if (mytask == null)
+            {
+                return NotFound();
+            }
+            return View(mytask);
+        }
+
+        // POST: MyTasks/Edit/5
+        [HttpPost]
+        public IActionResult Edit(int id, MyTask mytask)
+        {
+            if (id != mytask.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Update(mytask);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(mytask);
+        }
+
+
+
+
     }
 
 }
