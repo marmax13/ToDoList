@@ -14,5 +14,11 @@ public class TDLContext : DbContext
 
     public DbSet<Priority> Priorities { get; set; }
 
-}
+    private readonly TDLContext _db;
 
+    public MyTasksController(TDLContext db)
+    {
+        _db = db;
+    }
+
+}
