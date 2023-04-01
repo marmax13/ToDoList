@@ -16,6 +16,6 @@ public class MyTask
     [Required]
     public int ParentId { get; set; } = 0;
 
-    public List<Post>? Posts { get; set; }
+    public List<Priority>? Priorities { get; set; } 
 }
 
