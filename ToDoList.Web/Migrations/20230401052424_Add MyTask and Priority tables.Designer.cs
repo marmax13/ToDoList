@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoList.Web.Data;
 
@@ -11,9 +12,11 @@ using ToDoList.Web.Data;
 namespace ToDoList.Web.Migrations
 {
     [DbContext(typeof(TDLContext))]
-    partial class TDLContextModelSnapshot : ModelSnapshot
+    [Migration("20230401052424_Add MyTask and Priority tables")]
+    partial class AddMyTaskandPrioritytables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
