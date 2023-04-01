@@ -91,6 +91,32 @@ namespace ToDoList.Web.Controllers
         }
 
 
+        // GET: MyTasks/Delete/5
+        public IActionResult Delete(int id)
+        {
+            var mytask = _db.MyTasks.FirstOrDefault(m => m.Id == id);
+            if (mytask == null)
+            {
+                return NotFound();
+            }
+
+            return View(mytask);
+        }
+
+        // POST: MyTasks/DeleteConfirmed/5
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var mytask = _db.MyTasks.Find(id);
+            if (mytask != null)
+            {
+                _db.MyTasks.Remove(mytask);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+
 
 
     }

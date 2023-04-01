@@ -4,14 +4,26 @@
     ViewData["Title"] = "Все задачи";
 }
 
-<h1>Все задачи    Добавить задачу</h1>
+<h2>Все задачи    <a asp-action="Create" class="btn btn-success">Добавить задачу</a></h2>
 <hr />
-<h3>Номер         Название задачи        Приоритет          Статус        Действия</h3>
+<h2>Список задач</h2>
 <hr />
-<p>
-    <a asp-action="Create" class="btn btn-success">Создать новую</a>
-</p>
-<ul class="list-group">
+<table border="1">
+   <tr>
+      <th>Номер</th>
+      <th>Название задачи</th>
+      <th>Приоритет</th>
+      <th>Статус</th>
+      <th>Действия</th>
+   </tr>
+   <tr>
+    <td>1</td>
+    <td>item.Name</td>
+    <td>Высокий</td>
+    <td>Открыта</td>
+    <td><ul class="list-group">
+    
+    
     @foreach (var item in Model)
     {
         @if (item.ParentId == 0)
@@ -41,4 +53,9 @@
             }
         }
     }
-</ul>
+</ul></td>
+
+  </tr>
+ </table>
+<hr />
+

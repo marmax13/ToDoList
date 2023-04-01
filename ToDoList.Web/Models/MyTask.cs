@@ -18,4 +18,3 @@ public class MyTask
 
     public List<Priority>? Priorities { get; set; } 
 }
-
