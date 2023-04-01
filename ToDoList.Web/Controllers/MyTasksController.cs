@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ToDoList.Web.Data;
+using ToDoList.Web.Models;
 
 namespace ToDoList.Web.Controllers
 {
@@ -11,10 +13,55 @@ namespace ToDoList.Web.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+
+        // GET: /MyTasks/Index
+        public ActionResult Index()
         {
+            IEnumerable<MyTask> mytasks = _db.MyTasks.ToList(); 
+            return View(mytasks);
+        }
+
+
+        // GET: MyTasks/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id is null)
+            {
+                return NotFound();
+            }
+            var mytask = _db.MyTasks.FirstOrDefault(m => m.Id == id);
+            if (mytask is null)
+            {
+                return NotFound();
+            }
+
+            return View(mytask);
+        }
+
+
+
+        // GET: MyTasks/Create
+        public IActionResult Create()
+        {
+            ViewBag.MyTasks = new SelectList(_db.MyTasks.Where(x => x.ParentId == 0), "Id", "Name");
             return View();
         }
+
+        // POST: MyTasks/Create
+        [HttpPost]
+        public IActionResult Create(MyTask mytask)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(mytask);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(mytask);
+        }
+
+
+
     }
 
 }
